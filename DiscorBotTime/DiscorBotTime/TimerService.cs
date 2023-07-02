@@ -35,12 +35,14 @@ namespace DiscorBotTime
             
         }
 
+        // Method splits user input and parses it into integers. Copies integers into 2d array.
         public int[,]  SplitTime(string timeToRecall)
         {
             String[] splitTime = timeToRecall.Split(':');
 
             int[,] minutesAndSeconds = new int[1,2];
 
+            // need to add error handelning to make sure format is followed min:sec
             if (splitTime.Length == 2)
             {
                 for (int i = 0; i < splitTime.Length; i++)
@@ -50,7 +52,8 @@ namespace DiscorBotTime
                 
             }
 
-            foreach (var i in splitTime)
+            // prints
+            foreach (var i in minutesAndSeconds)
             {
                 Console.WriteLine(i);
             }
@@ -59,6 +62,7 @@ namespace DiscorBotTime
             
         }
 
+        // method to add minutes and seconds together
         public int MinutesAndSecondForTimer(int[,] createInputToSeconds)
         {
             var minutes = 0;
