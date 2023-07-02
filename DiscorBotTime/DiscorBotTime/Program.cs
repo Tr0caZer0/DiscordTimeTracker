@@ -1,15 +1,21 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DiscorBotTime;
-
-Console.WriteLine("Set timer (in minutes)");
-var timeToRecall = Console.ReadLine();
-var msToMin = int.Parse(timeToRecall);
-Console.Clear();
-Console.WriteLine("Timer starts");
-
-msToMin = msToMin * 60;//change name? 
-
-
 var serivice = new TimerService();
 
-serivice.StartTimer(msToMin);
+Console.WriteLine("Set timer in minutes and seconds(e.g. 12:30)");
+string timeToRecall = Console.ReadLine();
+
+
+//SplitTime(minutesAndSeconds);
+
+int [,] minutesAndSeconds = serivice.SplitTime(timeToRecall);
+//var msToMin = 0;
+//Console.Clear();
+
+var totalTime = serivice.MinutesAndSecondForTimer(minutesAndSeconds);
+
+Console.WriteLine("Timer starts");
+
+//msToMin = msToMin * 60;//change name? 
+
+serivice.StartTimer(totalTime);
