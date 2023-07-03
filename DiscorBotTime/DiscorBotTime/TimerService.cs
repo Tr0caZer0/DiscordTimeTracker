@@ -8,16 +8,16 @@ using System.Threading;
 
 namespace DiscorBotTime
 {
-    public class TimerService
+    public static class TimerService
     {
+        public static bool gotResponse { get; set; }
 
         //Takes total time and starts count down.
-        public void StartTimer(int capTimeMin)
+        public static void StartTimer(int capTimeMin)
         {
-
             var count = 1;
 
-            while(true)
+            while(!gotResponse)
             {
                 Thread.Sleep(1000);
                 Console.WriteLine(count);
@@ -26,7 +26,7 @@ namespace DiscorBotTime
                 if (count > capTimeMin)
                 {
                     Console.WriteLine("You Suck!");
-
+                    gotResponse = true;
                     break;
                 }
             }

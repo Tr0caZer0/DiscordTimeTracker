@@ -1,20 +1,20 @@
-﻿// See https://aka.ms/new-console-template for more information
-using DiscorBotTime;
-var tSerivice = new TimerService();
-var cSerivice = new ConvertInput();
+﻿using DiscorBotTime;
 
 Console.WriteLine("Set timer in minutes and seconds(e.g. 12:30)");
-string timeToRecall = Console.ReadLine();
-
 // Takes user input and cals on SplitTime method to create array of integers.
-int [,] minutesAndSeconds = cSerivice.SplitTime(timeToRecall);
-
-//Console.Clear();
+var minutesAndSeconds = ConvertInput.SplitTime(Console.ReadLine());
 
 // calls on MinutesAndSecondsForTimer method taking array from SplitTime method
-var totalTime = cSerivice.MinutesAndSecondForTimer(minutesAndSeconds);
+var totalTime = ConvertInput.MinutesAndSecondForTimer(minutesAndSeconds);
 
+TimerService.gotResponse = false;
 Console.WriteLine("Timer starts");
 
-// calls on StartTimer method taking values from MinutesAndSecondsForTimer method
-tSerivice.StartTimer(totalTime);
+var countdownThread = new Thread(() => TimerService.StartTimer(totalTime));
+countdownThread.Start();
+
+var response = Console.ReadLine();
+TimerService.gotResponse= true;
+
+// Wait for the countdown thread to complete
+countdownThread.Join();

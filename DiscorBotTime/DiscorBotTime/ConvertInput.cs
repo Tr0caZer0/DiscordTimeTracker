@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DiscorBotTime
 {
-    public class ConvertInput
+    public static class ConvertInput
     {
         // Method splits user input and parses it into integers. Copies integers into 2d array.
-        public int[,] SplitTime(string timeToRecall)
+        public static int[,] SplitTime(string timeToRecall)
         {
             String[] splitTime = timeToRecall.Split(':');
 
@@ -22,7 +22,6 @@ namespace DiscorBotTime
                 {
                     minutesAndSeconds[0, i] = int.Parse(splitTime[i]);
                 }
-
             }
 
             // only for follow up to make sure the input is correctly transfered to 2d array
@@ -36,7 +35,7 @@ namespace DiscorBotTime
         }
 
         // method to add minutes and seconds together
-        public int MinutesAndSecondForTimer(int[,] createInputToSeconds)
+        public static int MinutesAndSecondForTimer(int[,] createInputToSeconds)
         {
             var minutes = 0;
             var seconds = 0;
@@ -46,8 +45,6 @@ namespace DiscorBotTime
                 minutes = createInputToSeconds[i, 0];
 
                 seconds = createInputToSeconds[i, 1];
-
-
             }
 
             minutes = minutes * 60;
@@ -56,6 +53,14 @@ namespace DiscorBotTime
 
             return totalTime;
 
+        }
+
+        public static int test(string time)
+        {
+            var t = time.Split(":");
+            var minutes = (int.Parse(t[0]) * 60);
+            var seconds = int.Parse(t[1]);
+            return minutes + seconds;
         }
     }
 }
